@@ -61,3 +61,16 @@ body {
 .calculation_section_screen {
     display: none;
 }
+
+.time_segment {
+    size: 2;
+}
+
+.time_segment_long {
+    size: 5;
+}
+
+.calculation_section {
+    background-color: lightgray;  
+    width: 320px;  
+}

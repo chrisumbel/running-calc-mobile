@@ -32,9 +32,9 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/running-calc-web-ui/css/calcui.css">
 		<link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/running-calc-web-ui/css/calcui.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
 		<style>
 		/* For avoiding title truncation in wp8 */
 		.ui-header .ui-title {
@@ -69,7 +69,7 @@
                             <th><span class="units_label">mile</span>/h</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="calc_utom_uph" value="" class="time_segment_long"></td>
+                            <td><input type="text" id="calc_utom_uph" value="" size="2"></td>
                         </tr>
                     </table>	
                 </div>
@@ -84,8 +84,8 @@
                             <th>Seconds</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="calc_utom_mm" value="0" class="time_segment"></td>
-                            <td><input type="text" id="calc_utom_ss" value="0" class="time_segment_long"></td>
+                            <td><input type="text" id="calc_utom_mm" value="0" class="time_segment" size="2"></td>
+                            <td><input type="text" id="calc_utom_ss" value="0" class="time_segment_long" size="5"></td>
                         </tr>
                     </table>			
                 </div>		
@@ -104,7 +104,7 @@
                                 <th>Distance (<span class="units_label">mile</span>, optional)</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="calc_dist_dist" value="0" class="distance"></td>
+                                <td><input type="text" id="calc_dist_dist" value="0" class="distance" size="2"></td>
                             </tr>
                         </table>					
                     </div>
@@ -118,8 +118,8 @@
                                 <th>Seconds</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="calc_dist_mm" value="0" class="time_segment"></td>
-                                <td><input type="text" id="calc_dist_ss" value="0" class="time_segment"></td>
+                                <td><input type="text" id="calc_dist_mm" value="0" class="time_segment" size="2"></td>
+                                <td><input type="text" id="calc_dist_ss" value="0" class="time_segment" size="2"></td>
                             </tr>
                         </table>
         
@@ -134,7 +134,7 @@
                                 <th><span class="units_label">mile</span>/h</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="calc_dist_uph" value="1" class="units"></td>
+                                <td><input type="text" id="calc_dist_uph" value="1" class="units" size="2"></td>
                             </tr>
                         </table>					 
 
@@ -169,10 +169,10 @@
                             <th class="result_label">Seconds</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="calc_mpm_dist" value="1" class="distance"></td>
-                            <td><input type="text" id="calc_mpm_hh" value="0" class="time_segment"></td>
-                            <td><input type="text" id="calc_mpm_mm" value="0" class="time_segment"></td>
-                            <td><input type="text" id="calc_mpm_ss" value="0" class="time_segment"></td>
+                            <td><input type="text" id="calc_mpm_dist" value="1" class="distance" size="2"></td>
+                            <td><input type="text" id="calc_mpm_hh" value="0" class="time_segment" size="2"></td>
+                            <td><input type="text" id="calc_mpm_mm" value="0" class="time_segment" size="2"></td>
+                            <td><input type="text" id="calc_mpm_ss" value="0" class="time_segment" size="2"></td>
                         </tr>
                     </table>
 
