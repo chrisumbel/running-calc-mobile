@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var csState = 1;
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -26,25 +28,41 @@ var app = {
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
+    onDeviceReady: function() {        
+        $("#cs_units").show();
+        showCs();
+
+        this.receivedEvent('deviceready');        
+
+        $("body").bind('swiperight', swipeRight);
+        $("body").bind('swipeleft', swipeLeft);        
     },
 
-    // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
         console.log('Received Event: ' + id);
     }
 };
 
 app.initialize();
 
-function getDistanceMode() {
-    return "mile";
+function swipeRight() {
+    if(csState > 1) {
+        csState--;
+    }
+
+    showCs();
+}
+
+function swipeLeft() {
+    if(csState < 3) {
+        csState++;
+    }
+
+    showCs();    
+}
+
+function showCs() {
+        $(".calculation_section_screen").hide();
+        $("#cs_" + csState.toString()).show();        
 }

@@ -28,19 +28,40 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="bower_components/running-calc-web-ui/css/calcui.css">
+		<link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
+		<style>
+		/* For avoiding title truncation in wp8 */
+		.ui-header .ui-title {
+				overflow: visible !important;
+		}
+		/* For fixing the absolute position issue for the default cordova gen page*/
+		#cjp-accordion1 .app {
+				left: 5px !important;
+				margin: 5px !important;
+				position: relative !important;
+		}
+		</style>
         <title>Hello World</title>
     </head>
     <body>
         <div class="app">
-            <div class="calculation_section">
+            <div class="calculation_section" id="cs_units">
+                Units of distance: 
+                <input type="radio" name="calc_units" id="calc_units_miles" value="mile" checked="yes">Miles
+                <input type="radio" name="calc_units" id="calc_units_km" value="km">Kilometers			
+            </div>
+
+            <hr>		
+                
+            <div class="calculation_section calculation_section_screen" id="cs_1">
                 <h2><span class="units_label">mile</span>s per hour to Minutes per <span class="units_label">mile</span></h2>
-                <h3>I'd like to convert Minutes/<span class="units_label">mile</span> to <span class="units_label">mile</span>s per hour, or vice versa.</h3>
+                <h3>I&apos;d like to convert Minutes/<span class="units_label">mile</span> to <span class="units_label">mile</span>s per hour, or vice versa.</h3>
 
                 <div class="input_group">
                     <table>
@@ -48,12 +69,12 @@
                             <th><span class="units_label">mile</span>/h</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="calc_utom_uph" value="" class="time_segment_long"></input></td>
+                            <td><input type="text" id="calc_utom_uph" value="" class="time_segment_long"></td>
                         </tr>
                     </table>	
                 </div>
                 <div class="input_group">
-                    <button id="calc_utom_uph_to_mpm">&gt;</button><br/>
+                    <button id="calc_utom_uph_to_mpm">&gt;</button><br>
                     <button id="calc_utom_mpm_to_uph">&lt;</button>
                 </div>
                 <div class="input_group">
@@ -63,18 +84,119 @@
                             <th>Seconds</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="calc_utom_mm" value="0" class="time_segment"></input></td>
-                            <td><input type="text" id="calc_utom_ss" value="0" class="time_segment_long"></input></td>
+                            <td><input type="text" id="calc_utom_mm" value="0" class="time_segment"></td>
+                            <td><input type="text" id="calc_utom_ss" value="0" class="time_segment_long"></td>
                         </tr>
                     </table>			
                 </div>		
 
                 <div class="clear"></div>			
             </div>
+
+            <div class="calculation_section calculation_section_screen" id="cs_2">
+                <h2>Minutes/<span class="units_label">mile</span> to Distance &amp; Time</h2>
+                <h3>If I ran at a certain speed when would I finish a given distance?</h3>
+
+                <div>
+                    <div class="input_group">
+                        <table>
+                            <tr>
+                                <th>Distance (<span class="units_label">mile</span>, optional)</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="calc_dist_dist" value="0" class="distance"></td>
+                            </tr>
+                        </table>					
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="input_group">
+                        <table>
+                            <tr>
+                                <th>Minutes</th>
+                                <th>Seconds</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="calc_dist_mm" value="0" class="time_segment"></td>
+                                <td><input type="text" id="calc_dist_ss" value="0" class="time_segment"></td>
+                            </tr>
+                        </table>
+        
+                        <button id="calc_dist_calc_time">calc</button>
+                    </div>
+                    <div style="float: left;">
+                        or  
+                    </div>
+                    <div class="input_group">
+                        <table>
+                            <tr>
+                                <th><span class="units_label">mile</span>/h</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="calc_dist_uph" value="1" class="units"></td>
+                            </tr>
+                        </table>					 
+
+                        <button id="calc_dist_calc_uph">calc</button>					
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <table id="calc_dist">
+                        <thead>
+                            <tr>
+                                <th>Distance</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calc_dist_results" class="result">
+                        </tbody>																				
+                    </table>				
+                </div>
+            </div>
+
+            <div class="calculation_section calculation_section_screen" id="cs_3">
+                <h2>Distance &amp; Time to Minutes/<span class="units_label">mile</span></h2>
+                <h3>I ran so far in such an amount of time. How fast did I go?</h3>
+
+                <div class="input_group">
+                    <table>
+                        <tr>
+                            <th class="result_label">Distance (<span class="units_label">mile</span>)</th>
+                            <th class="result_label">Hours</th>
+                            <th class="result_label">Minutes</th>
+                            <th class="result_label">Seconds</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="calc_mpm_dist" value="1" class="distance"></td>
+                            <td><input type="text" id="calc_mpm_hh" value="0" class="time_segment"></td>
+                            <td><input type="text" id="calc_mpm_mm" value="0" class="time_segment"></td>
+                            <td><input type="text" id="calc_mpm_ss" value="0" class="time_segment"></td>
+                        </tr>
+                    </table>
+
+                    <button id="calc_mpm_calc">calc</button>
+                </div>
+
+                <div class="clear"></div>
+
+                <span class="result_label">Result (per <span class="units_label">mile</span>):</span> <span type="text" id="calc_mpm_result" class="time result"></span>
+            </div>            
+                    
+            <div id="deviceready"></div>             
         </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+		<script type="text/javascript" id="jqm-trans-disable">
+		/* For having a faster transition */
+		$(document).on("mobileinit", function() {
+				$.mobile.defaultPageTransition = "none";
+				$.mobile.defaultDialogTransition = "none";
+		});
+		</script>
+        <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
     	<script type="text/javascript" src="bower_components/running-calc/js/calc.js"></script>        
         <script type="text/javascript" src="bower_components/running-calc-web-ui/js/calcui.js"></script>
     </body>
