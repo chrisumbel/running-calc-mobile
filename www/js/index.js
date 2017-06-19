@@ -70,5 +70,8 @@ function showCs() {
         $("#cs_" + csState.toString()).show();        
 }
 
-$("#calc_dist_calc_uph").bind('click', function() {
+$(".tab").click(function(event) {
+    var tabNumber = $(event.target).attr('id').split("_")[1];
+    csState = parseInt(tabNumber);
+    showCs();
 });
