@@ -50,6 +50,16 @@
         <title>Hello World</title>
     </head>
     <body>
+        <header>
+            <div class="top">
+            </div>
+            <div id="menu" class="tabbar">
+                <div class="tab tab-deselected" id="tab_1">Speed Conversion</div>
+                <div class="tab tab-deselected" id="tab_2">Finishing Time</div>
+                <div class="tab tab-deselected" id="tab_3">Speed given Distance</div>                                
+            </div>
+        </header>
+        
         <div class="app">
             <div class="calculation_section" id="cs_units">
                 Units of distance: 
@@ -182,10 +192,11 @@
                 <div class="clear"></div>
 
                 <span class="result_label">Result (per <span class="units_label">mile</span>):</span> <span type="text" id="calc_mpm_result" class="time result"></span>
-            </div>            
-                    
-            <div id="deviceready"></div>             
+            </div>
         </div>
+        
+        <div id="deviceready"></div>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
 		<script type="text/javascript" id="jqm-trans-disable">
@@ -196,8 +207,8 @@
 		});
 		</script>
         <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
     	<script type="text/javascript" src="bower_components/running-calc/js/calc.js"></script>        
         <script type="text/javascript" src="bower_components/running-calc-web-ui/js/calcui.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

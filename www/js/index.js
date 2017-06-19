@@ -63,6 +63,12 @@ function swipeLeft() {
 }
 
 function showCs() {
+        $(".tab").removeClass("tab-selected");
+        $("#tab_" + csState.toString()).addClass("tab-selected");        
+
         $(".calculation_section_screen").hide();
         $("#cs_" + csState.toString()).show();        
 }
+
+$("#calc_dist_calc_uph").bind('click', function() {
+});
